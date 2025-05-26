@@ -1,9 +1,19 @@
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
 const API_KEY = "c2a5578949b65ff259b14fd948053451";
+const DAYS = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
 
 const searchInput = document.querySelector("input");
 const searchButton = document.querySelector("button");
 const weatherContainer = document.getElementById("weather");
+const forecastContainer = document.getElementById("forecast");
 const locationIcon = document.getElementById("location");
 
 const getCurrentWeatherByName = async (city) => {
@@ -47,7 +57,31 @@ const renderCurrentWeather = (data) => {
     `;
   weatherContainer.innerHTML = weather;
 };
-// showing the current weather of the city
+// showing the Forecast weather of the city
+//dt.txt = time and date object
+const getWeekDay = (date) => {
+  return DAYS[new Date(date * 1000).getDay()];
+};
+
+const renderForecastWeather = (data) => {
+  data = data.list.filter((obj) => obj.dt_txt.endsWith("12:00:00"));
+  console.log(data);
+  data.forEach((i) => {
+    const forecast = `
+     <div>
+      <img alt="weather icon" src="http://openweathermap.org/img/w/${
+        i.weather[0].icon
+      }.png" />
+      <h3>${getWeekDay(i.dt)}</h3>
+      <p>${Math.round(i.main.temp)} °C</p>
+      <span>${i.weather[0].main}</span>
+     </div>
+    `;
+    forecastContainer.innerHTML += forecast;
+  });
+};
+
+// city name input
 const searchHandler = async () => {
   const cityName = searchInput.value;
   if (!cityName) {
@@ -58,7 +92,7 @@ const searchHandler = async () => {
   renderCurrentWeather(currentData);
   // forecast weather
   const forecastData = await getForecastWeatherByName(cityName);
-  console.log(forecastData);
+  renderForecastWeather(forecastData);
 };
 // location
 const positionCallback = async (position) => {
