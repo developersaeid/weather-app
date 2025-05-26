@@ -19,6 +19,13 @@ const getCurrentWeatherByCoordinates = async (lat, lon) => {
   const json = await response.json();
   return json;
 };
+// future days weather forecast
+const getForecastWeatherByName = async (city) => {
+  const url = `${BASE_URL}/forecast?q=${city}&appid=${API_KEY}&units=metric`;
+  const response = await fetch(url);
+  const json = await response.json();
+  return json;
+};
 
 // showing the current weather of the city
 const renderCurrentWeather = (data) => {
@@ -46,8 +53,12 @@ const searchHandler = async () => {
   if (!cityName) {
     alert("Please enter city Name!");
   }
+  // current weather
   const currentData = await getCurrentWeatherByName(cityName);
   renderCurrentWeather(currentData);
+  // forecast weather
+  const forecastData = await getForecastWeatherByName(cityName);
+  console.log(forecastData);
 };
 // location
 const positionCallback = async (position) => {
