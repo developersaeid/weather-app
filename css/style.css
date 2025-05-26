@@ -209,4 +209,7 @@ body {
     width: 95%;
     margin: auto;
   }
+  #weather #info {
+    flex-direction: column;
+  }
 }
