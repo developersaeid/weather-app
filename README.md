@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/3ae8202c-bcee-46c9-b2f3-1e489a047a68)# 🌦️ Weather App
+# 🌦️ Weather App
 
 A simple, responsive weather web application built with vanilla JavaScript, HTML, and CSS. This project allows users to view current weather conditions and 5-day forecasts by either entering a city name or using their current geolocation.
 
@@ -22,5 +22,5 @@ A simple, responsive weather web application built with vanilla JavaScript, HTML
 - Netlify (for deployment)
 
 ## 📸 Screenshots
-
+![image](https://github.com/user-attachments/assets/3ae8202c-bcee-46c9-b2f3-1e489a047a68)
 
